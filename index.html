@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>لیست قیمت | DENCO · Eighteeth · ZUMAX</title>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+<style>
+:root{--bg:#e6ebf1;--hi:#ffffff;--lo:#b8c2cf;--ink:#2d3748;--mute:#718096;--accent:#2b6cb0;--orange:#dd6b20}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Vazirmatn,Tahoma,sans-serif;line-height:1.7}
+.wrap{max-width:1080px;margin:auto;padding:32px 18px 60px}
+.raised{background:var(--bg);border-radius:22px;box-shadow:9px 9px 18px var(--lo),-9px -9px 18px var(--hi)}
+.inset{background:var(--bg);border-radius:14px;box-shadow:inset 5px 5px 10px var(--lo),inset -5px -5px 10px var(--hi)}
+header{text-align:center;padding:40px 20px;margin-bottom:28px}
+header h1{margin:0 0 6px;font-size:clamp(26px,5vw,40px);font-weight:800}
+header p{margin:0;color:var(--mute)}
+nav{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+nav button{font:inherit;font-weight:700;border:0;cursor:pointer;padding:10px 24px;color:var(--ink)}
+nav button.on{box-shadow:inset 5px 5px 10px var(--lo),inset -5px -5px 10px var(--hi);color:var(--accent)}
+.search{display:block;width:100%;max-width:420px;margin:22px auto 0;padding:12px 18px;border:0;font:inherit;color:var(--ink);outline:none;direction:rtl}
+.brand{margin:40px 0 18px;display:flex;align-items:center;gap:12px;font-size:24px;font-weight:800}
+.tdp{height:70px;margin-bottom:14px}.blogo{height:42px;padding:12px 22px;box-sizing:content-box;max-width:80%;object-fit:contain}.dot{width:16px;height:16px;border-radius:50%;box-shadow:3px 3px 6px var(--lo),-3px -3px 6px var(--hi)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:24px}
+.cat{padding:22px}
+.cat h3{margin:0 0 14px;font-size:17px}
+.item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 14px;margin-top:10px}
+.name{direction:ltr;text-align:left;font-weight:600;font-size:14px}
+.name small{display:block;color:var(--mute);font-weight:400;font-size:12px}
+.price{white-space:nowrap;font-weight:800;color:var(--accent);font-size:14px}
+.price span{font-weight:400;color:var(--mute);font-size:11px;margin-right:3px}
+.soon{color:var(--orange);font-weight:700;font-size:13px;white-space:nowrap}
+.hide{display:none!important}
+footer{text-align:center;color:var(--mute);margin-top:50px;font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="raised">
+    <img src="assets/TDP-logo.svg" alt="TDP" class="tdp"><h1>لیست قیمت محصولات</h1>
+    <p>DENCO · Eighteeth · ZUMAX — قیمت‌ها به تومان</p>
+    <nav id="tabs"></nav>
+    <input id="q" class="search inset" placeholder="جستجوی محصول…">
+  </header>
+  <main id="app"></main>
+  <footer>قیمت‌ها ممکن است بدون اطلاع قبلی تغییر کنند.</footer>
+</div>
+<script>
+const S='soon';
+const DATA=[
+ {brand:'DENCO',logo:'denco.png',color:'#dd6b20',cats:[
+  ['🦷 Rotary Endodontic Files',[
+   ['D Super Files (GOLD)','Sx, S1, S2, F1, F2, F3, Assort · 25mm',1800000],
+   ['Super Files III (Blue)','Sx, S1, S2, F1, F2, F3, Assort · 25mm',1700000],
+   ['ONLY ONE FILE Blue (Reciproc)','25-8%, 40-6%, 50-5%, Assort · 25mm',2200000],
+   ['PRO PATH FILE','16-(2-6)% · 25mm',1850000],
+   ['PA PATH FILE','13-2%, 16-2%, 19-2%, ASS · 25mm',1850000],
+   ['D-FILE (Retreatment)','D1: 30-9% 16mm · D2: 25-8% 18mm · D3: 20-7% 22mm',1850000],
+   ['PRO FLEXI FILE (Gold)','20×4%, 25×4%, 30×4%, 35×4%, 25×6%, 30×6% · 25mm / Assort',1850000]]],
+  ['🦷 Manual Files',[['U-FILE','15-20-25, Assort (15-40) · 33mm',520000]]],
+  ['🔧 File Holder & Plugger',[
+   ['Single Digit Plugger','',3450000],['Digit Plugger','',13600000],
+   ['Smart File Holder','',3200000],['Micro Opener','',2500000]]]]},
+ {brand:'Eighteeth',logo:'Eighteeth-logo-transparent.png',color:'#2b6cb0',cats:[
+  ['🔍 Intraoral Scanner',[['Helios 700','',1470000000],['Helios 680','',1320000000],['Helios 500','',1190000000]]],
+  ['⚙️ Endomotor',[['E Connect S','',128800000],['E Connect Pro','',83000000],['E Connect Se','',78000000],['E Value','',60000000],['Extream','',69000000]]],
+  ['📍 Apex Locator',[['Epex','',38000000],['Find Pex','',S]]],
+  ['⚡ Ultrasonic',[['Ultra X','',41500000],['Ultramint Pro','',94500000],['Surfy One','',40000000]]],
+  ['🦷 Obturator',[['Fast Fill','',95000000],['Fast Pack','',65000000]]],
+  ['📸 RVG',[['Nano Pix 1','',140000000],['Nano Pix 1.3','',160000000],['Nano Pix M Tech 1.5','',S],['Nano Pix 2','',165000000]]],
+  ['💡 Light Cure',[['Curing Pen','',25500000]]],
+  ['⚙️ Motor Surgery',[['Motor Impant','',345000000],['Turbo Motor','',92000000],['E-Asp1','',105800000],['E-flow','',185000000]]]]},
+ {brand:'ZUMAX',logo:'Zumax-logo-blue.png',color:'#3182ce',cats:[
+  ['🔍 SL Series',[['SLE','2.5 – 3.0 – 3.5',41500000],['SLH','2.5 – 3.0 – 3.5',44500000],['SLF','2.5 – 3.0 – 3.5',48500000]]],
+  ['🔬 SLH Prismatic',[['SLH 4.0','',170000000],['SLH 5.0','',183000000],['SLH 6.0','',195500000]]],
+  ['👓 SLT TTL',[['TTL Colorful','2.5',98000000],['TTL','2.5 – 3.0',92000000],['TTL','5.0',333500000],['TTL','6.0',356500000]]],
+  ['🔭 DFK Loupes',[['DFK 3.0','',308000000],['DFK 4.0','',322000000],['DFK 5.0','',336000000]]],
+  ['💡 Headlight',[['HL 8260','',83000000],['HL 8200','',S]]],
+  ['🛠 Instruments',[['KAMAND','',50000000]]]]}
+];
+const fa=n=>n.toLocaleString('fa-IR');
+let active='all';
+const app=document.getElementById('app'),tabs=document.getElementById('tabs'),q=document.getElementById('q');
+['all',...DATA.map(d=>d.brand)].forEach(b=>{
+ const x=document.createElement('button');x.className='raised';x.textContent=b==='all'?'همه برندها':b;x.dataset.b=b;
+ x.onclick=()=>{active=b;render()};tabs.appendChild(x)});
+function render(){
+ const t=q.value.trim().toLowerCase();app.innerHTML='';
+ tabs.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.b===active));
+ DATA.forEach(d=>{
+  if(active!=='all'&&active!==d.brand)return;
+  let html='';
+  d.cats.forEach(([c,items])=>{
+   const rows=items.filter(i=>!t||(i[0]+' '+i[1]+' '+c).toLowerCase().includes(t));
+   if(!rows.length)return;
+   html+=`<section class="cat raised"><h3>${c}</h3>${rows.map(([n,s,p])=>`<div class="item inset"><div class="name">${n}${s?`<small>${s}</small>`:''}</div>${p===S?'<div class="soon">به‌زودی</div>':`<div class="price">${fa(p)}<span>تومان</span></div>`}</div>`).join('')}</section>`});
+  if(html)app.insertAdjacentHTML('beforeend',`<h2 class="brand"><span class="raised" style="display:inline-block;border-radius:22px"><img class="blogo" style="mix-blend-mode:multiply" src="assets/${d.logo}" alt="${d.brand}"></span></h2><div class="grid">${html}</div>`)});
+ if(!app.innerHTML)app.innerHTML='<p style="text-align:center;color:var(--mute)">محصولی پیدا نشد.</p>';
+}
+q.oninput=render;render();
+</script>
+</body>
+</html>
