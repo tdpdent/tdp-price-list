@@ -102,11 +102,11 @@ const CODES={
  'TTL|5.0':r(11100055,11100060),'TTL|6.0':r(11100061,11100068),
  'DFK 3.0':['11110008','11110009','11110016'],'DFK 4.0':['11110012','11110013','11110014','11110015'],'DFK 5.0':['11110005','11110006','11110007'],
  'HL 8260':['11040011'],'HL 8200':['11040012','11040013'],'KAMAND':['11120001']};
-// Most common panel price among a row's variants.
+// Most common panel price (rials) among a row's variants.
 function livePrice(P,codes){const c={};(codes||[]).forEach(k=>{if(P[k])c[P[k]]=(c[P[k]]||0)+1});
  const best=Object.entries(c).sort((a,b)=>b[1]-a[1])[0];return best?+best[0]:null}
 function applyLive(P){DATA.forEach(d=>d.cats.forEach(([,items])=>items.forEach(i=>{
- const v=livePrice(P,CODES[i[0]+'|'+i[1]]||CODES[i[0]]);if(v)i[2]=v})));render()}
+ const v=livePrice(P,CODES[i[0]+'|'+i[1]]||CODES[i[0]]);if(v)i[2]=Math.round(v/10)}  // panel stores rials; page shows tomans)));render()}
 let active='all';
 const app=document.getElementById('app'),tabs=document.getElementById('tabs'),q=document.getElementById('q');
 ['all',...DATA.map(d=>d.brand)].forEach(b=>{
