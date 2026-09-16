@@ -106,7 +106,7 @@ const CODES={
 function livePrice(P,codes){const c={};(codes||[]).forEach(k=>{if(P[k]>=100000)c[P[k]]=(c[P[k]]||0)+1});
  const best=Object.entries(c).sort((a,b)=>b[1]-a[1])[0];return best?+best[0]:null}
 function applyLive(P){DATA.forEach(d=>d.cats.forEach(([,items])=>items.forEach(i=>{
- const v=livePrice(P,CODES[i[0]+'|'+i[1]]||CODES[i[0]]);if(v)i[2]=Math.round(v/10)}  // panel stores rials; page shows tomans)));render()}
+ const v=livePrice(P,CODES[i[0]+'|'+i[1]]||CODES[i[0]]);if(v)i[2]=Math.round(v/10)/* panel rials -> tomans */})));render()}
 let active='all';
 const app=document.getElementById('app'),tabs=document.getElementById('tabs'),q=document.getElementById('q');
 ['all',...DATA.map(d=>d.brand)].forEach(b=>{
