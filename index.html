@@ -84,7 +84,7 @@ const DATA=[
 ];
 const fa=n=>n.toLocaleString('fa-IR');
 // Panel product codes behind each row. Prices come live from the staff panel
-// (tdp-bot-brain.liara.run/admin); the numbers above are only a fallback.
+// (tdpbot.ir/admin); the numbers above are only a fallback.
 const r=(a,b)=>Array.from({length:b-a+1},(_,i)=>String(a+i).padStart(8,'0'));
 const CODES={
  'D Super Files (GOLD)':[...r(2580001,2580005),'02020015'],'Super Files III (Blue)':r(2010013,2010018),
@@ -126,7 +126,7 @@ function render(){
  if(!app.innerHTML)app.innerHTML='<p style="text-align:center;color:var(--mute)">محصولی پیدا نشد.</p>';
 }
 q.oninput=render;render();
-fetch('https://tdp-bot-brain.liara.run/public/prices').then(x=>x.json()).then(j=>applyLive(j.prices||{})).catch(()=>{});
+fetch('https://tdpbot.ir/public/prices').then(x=>x.json()).then(j=>applyLive(j.prices||{})).catch(()=>{});
 </script>
 </body>
 </html>
